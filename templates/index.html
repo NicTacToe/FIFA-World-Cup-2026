@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 — Live Results</title>
+  <meta name="description" content="Live scores, results and upcoming fixtures for the FIFA World Cup 2026 in Canada, Mexico & USA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- Animated background particles -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-logo">
+        <span class="trophy-icon">🏆</span>
+        <div class="header-title-group">
+          <h1>FIFA World Cup 2026</h1>
+          <p class="header-subtitle">Canada · Mexico · United States</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span id="last-updated" class="last-updated" aria-live="polite"></span>
+        <button id="refresh-btn" class="btn-refresh" aria-label="Refresh match data">
+          <span class="refresh-icon" aria-hidden="true">↻</span>
+          Refresh
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Stats Bar -->
+    <section class="stats-bar" id="stats-bar" aria-label="Tournament statistics">
+      <div class="stat-card" id="stat-total">
+        <span class="stat-num">—</span>
+        <span class="stat-label">Total Matches</span>
+      </div>
+      <div class="stat-card" id="stat-finished">
+        <span class="stat-num">—</span>
+        <span class="stat-label">Completed</span>
+      </div>
+      <div class="stat-card" id="stat-upcoming">
+        <span class="stat-num">—</span>
+        <span class="stat-label">Upcoming</span>
+      </div>
+      <div class="stat-card" id="stat-goals">
+        <span class="stat-num">—</span>
+        <span class="stat-label">Goals Scored</span>
+      </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar" role="tablist" aria-label="Filter matches">
+      <button class="filter-btn active" role="tab" aria-selected="true" data-filter="results" id="tab-results">Results</button>
+      <button class="filter-btn" role="tab" aria-selected="false" data-filter="upcoming" id="tab-upcoming">Upcoming</button>
+      <button class="filter-btn" role="tab" aria-selected="false" data-filter="all" id="tab-all">All Matches</button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading-container" role="status" aria-label="Loading match data">
+      <div class="spinner"></div>
+      <p>Fetching live data…</p>
+    </div>
+
+    <!-- Error Banner -->
+    <div id="error-banner" class="error-banner hidden" role="alert">
+      <span class="error-icon">⚠️</span>
+      <span id="error-message">Failed to load match data.</span>
+      <button id="retry-btn" class="btn-retry">Try Again</button>
+    </div>
+
+    <!-- Matches Container -->
+    <div id="matches-container" class="matches-container hidden" aria-label="Match results">
+      <div id="results-section">
+        <h2 class="section-heading results-heading">
+          <span class="section-badge finished-badge">FT</span>
+          Results &amp; Live
+        </h2>
+        <div id="results-grid" class="matches-grid"></div>
+      </div>
+      <div id="upcoming-section">
+        <h2 class="section-heading upcoming-heading">
+          <span class="section-badge upcoming-badge">UPCOMING</span>
+          Fixtures
+        </h2>
+        <div id="upcoming-grid" class="matches-grid"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Data provided by <a href="https://worldcup26.ir" target="_blank" rel="noopener">worldcup26.ir</a> · FIFA World Cup 2026</p>
+  </footer>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
