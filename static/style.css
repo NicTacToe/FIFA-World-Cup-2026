@@ -309,6 +309,211 @@ main {
 
 #results-section { margin-bottom: 3rem; }
 
+/* ── Knockout Bracket ── */
+.bracket-section {
+  animation: card-in 0.35s ease both;
+}
+
+.bracket-badge {
+  background: rgba(245,200,66,0.14);
+  color: var(--gold);
+  border: 1px solid rgba(245,200,66,0.32);
+}
+
+.bracket-scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 0.25rem 0 1.5rem;
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(245,200,66,0.45) rgba(255,255,255,0.06);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---- Board: flex row of columns ---- */
+.bracket-board {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 0;
+  min-width: max-content;
+  padding: 1rem 3rem 2rem 1rem;  /* extra right padding so Final card is never clipped */
+}
+
+/* ---- Each round column ---- */
+.bracket-round {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.bracket-round-header {
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 0;
+  margin-bottom: 0.5rem;
+}
+
+.bracket-round-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+}
+
+/* ---- Match-list: relative container for absolute children ---- */
+.bracket-match-list {
+  position: relative;
+  /* height is set by JS */
+  width: 230px;
+}
+
+/* ---- Each card wrapper (positioned absolutely by JS) ---- */
+.bracket-node-wrap {
+  position: absolute;
+  left: 0;
+  width: 230px;
+  display: flex;
+  align-items: center;
+}
+
+/* Horizontal connector line from the right edge of a card to the next column */
+.bn-connector-h {
+  flex: 0 0 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--border-gold) 0%, rgba(245,200,66,0.08) 100%);
+  position: relative;
+}
+
+/* Last column has no outgoing connector */
+.bracket-round:last-child .bn-connector-h {
+  display: none;
+}
+
+
+
+/* ---- The card itself ---- */
+.bracket-node {
+  width: 202px;   /* 230px wrap - 28px connector */
+  min-height: 100px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue-accent);
+  border-radius: var(--radius-md);
+  padding: 0.55rem 0.7rem;
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+  overflow: hidden;
+  cursor: default;
+  flex: 0 0 auto;
+}
+
+.bracket-node:hover {
+  border-color: var(--border-gold);
+  border-left-color: var(--gold);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.bracket-node.status-finished { border-left-color: var(--green); }
+.bracket-node.status-live     { border-left-color: var(--live-color); }
+.bracket-node.status-upcoming { border-left-color: var(--blue-accent); }
+
+/* ---- Kickoff line ---- */
+.bn-kickoff {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  margin-bottom: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.bn-date {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bn-time {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ---- Team row ---- */
+.bn-team {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.3rem;
+  border-radius: 6px;
+  transition: background var(--transition);
+  min-width: 0;
+}
+
+.bn-team.winner {
+  background: rgba(0,201,142,0.1);
+}
+.bn-team.winner .bn-name {
+  color: var(--green);
+  font-weight: 800;
+}
+.bn-team.winner .bn-score {
+  color: var(--green);
+}
+
+.bn-team.loser {
+  opacity: 0.5;
+}
+
+.bn-flag {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.bn-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.bn-score {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 0 0 12px var(--gold-glow);
+  flex-shrink: 0;
+  min-width: 1.2rem;
+  text-align: right;
+  line-height: 1;
+}
+
+/* Last round: no outgoing connector — card fills full wrap width */
+.bracket-round:last-child .bracket-node-wrap { width: 230px; }
+.bracket-round:last-child .bracket-node { width: 230px; }
+
+.bn-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.22rem 0;
+}
+
 /* ── Matches Grid ── */
 .matches-grid {
   display: grid;
@@ -604,8 +809,8 @@ footer a:hover { text-decoration: underline; }
   .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 0.65rem; }
   .stat-num { font-size: 1.6rem; }
   .matches-grid { grid-template-columns: 1fr; }
-  .filter-bar { width: 100%; }
-  .filter-btn { flex: 1; text-align: center; padding: 0.5rem 0.5rem; font-size: 0.8rem; }
+  .filter-bar { width: 100%; overflow-x: auto; }
+  .filter-btn { flex: 0 0 auto; text-align: center; padding: 0.5rem 0.7rem; font-size: 0.8rem; white-space: nowrap; }
   h1 { font-size: 1.2rem; }
 }
 

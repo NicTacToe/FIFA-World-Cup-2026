@@ -64,7 +64,7 @@
     <div class="filter-bar" role="tablist" aria-label="Filter matches">
       <button class="filter-btn active" role="tab" aria-selected="true" data-filter="results" id="tab-results">Results</button>
       <button class="filter-btn" role="tab" aria-selected="false" data-filter="upcoming" id="tab-upcoming">Upcoming</button>
-      <button class="filter-btn" role="tab" aria-selected="false" data-filter="all" id="tab-all">All Matches</button>
+      <button class="filter-btn" role="tab" aria-selected="false" data-filter="bracket" id="tab-bracket">Knockout Bracket</button>
     </div>
 
     <!-- Loading Spinner -->
@@ -97,6 +97,17 @@
         <div id="upcoming-grid" class="matches-grid"></div>
       </div>
     </div>
+
+    <!-- Knockout Bracket -->
+    <section id="bracket-section" class="bracket-section hidden" aria-label="Knockout bracket">
+      <h2 class="section-heading bracket-heading">
+        <span class="section-badge bracket-badge">KNOCKOUT</span>
+        Knockout Bracket
+      </h2>
+      <div class="bracket-scroll" aria-label="Horizontally scrollable knockout bracket">
+        <div id="bracket-board" class="bracket-board"></div>
+      </div>
+    </section>
   </main>
 
   <footer>
